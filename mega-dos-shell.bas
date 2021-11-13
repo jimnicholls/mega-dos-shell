@@ -21,17 +21,21 @@
   250 forx=0to1:printchr$(b&(22+x));:next:cursor33,0
   260 forx=0to1:printchr$(b&(25+x));:next
   270 b=3
-  280 gosub500:ifa<>0thencursor0,2:foreground2:printds$:foreground1:stop
-  290 fory=0to7:o=32*y+2:cursor5,2+y:printusing"####";b&(o+28)+b&(o+29)*256:cursor12,2+y
-  300 forx=0to15:printchr$(b&(o+3+x));:next:cursor32,y+2:fgoto310+(b&(o+0)and7)*10
-  310 print"del";:goto370
-  320 print"seq";:goto370
-  330 print"prg";:goto370
-  340 print"usr";:goto370
-  350 print"rel";:goto370
-  360 print"cbm";:goto370
-  370 next
-  380 close15:end
+  280 do:cursor0,24:print"block ";:printusing"##";b;:window1,2,37,22,1:print"{home}{home}";
+  290 gosub500:ifa<>0thencursor0,2:foreground2:printds$:foreground1:stop
+  300 fory=0to7:o=32*y+2:cursor5,2+y:printusing"####";b&(o+28)+b&(o+29)*256:cursor12,2+y
+  310 forx=0to15:printchr$(b&(o+3+x));:next:cursor32,y+2:fgoto320+(b&(o+0)and7)*10
+  320 print"del";:goto380
+  330 print"seq";:goto380
+  340 print"prg";:goto380
+  350 print"usr";:goto380
+  360 print"rel";:goto380
+  370 print"cbm";:goto380
+  380 next
+  390 getkeya&
+  400 ifa&=43andb<39thenb=b+1
+  410 loop
+  420 close15:end
   500 close5:open5,8,5,"#":print#15,"u1";5;0;t;b
   510 a=ds:ifa<>0thenclose5:return
   520 forx=0to255:get#5,a$:ifa$=""thenb&(x)=0:elseb&(x)=asc(a$):nextx
