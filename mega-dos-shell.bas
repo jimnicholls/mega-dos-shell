@@ -13,30 +13,26 @@
   150 next
   160 close5:close15
   170 end
-  200 scnclr
-  210 open15,8,15:dimb&(255):t=40:b=0:gosub500
-  220 ifa<>0thencursor0,2:foreground2:printds$:foreground1:stop
-  230 cursor2,0:print"u8 virt";:cursor12,0
-  240 forx=0to15:printchr$(b&(4+x));:next:cursor30,0
-  250 forx=0to1:printchr$(b&(22+x));:next:cursor33,0
-  260 forx=0to1:printchr$(b&(25+x));:next
-  270 b=3
-  280 do:cursor0,24:print"block ";:printusing"##";b;:window1,2,37,22,1:print"{home}{home}";
-  290 gosub500:ifa<>0thencursor0,2:foreground2:printds$:foreground1:stop
-  300 fory=0to7:o=32*y+2:cursor5,2+y:printusing"####";b&(o+28)+b&(o+29)*256:cursor12,2+y
-  310 forx=0to15:printchr$(b&(o+3+x));:next:cursor32,y+2:fgoto320+(b&(o+0)and7)*10
-  320 print"del";:goto380
-  330 print"seq";:goto380
-  340 print"prg";:goto380
-  350 print"usr";:goto380
-  360 print"rel";:goto380
-  370 print"cbm";:goto380
-  380 next
-  390 getkeya&
-  400 ifa&=43andb<39thenb=b+1
-  410 ifa&=45andb>3thenb=b-1
-  420 loop
-  430 close15:end
+  200 scnclr:dimft$(7):restore220
+  210 forx=0to7:readft$(x):next
+  220 datadel,seq,prg,usr,rel,cbm,?,?
+  230 open15,8,15:dimb&(255):t=40:b=0:gosub500
+  240 ifa<>0thencursor0,2:foreground2:printds$:foreground1:stop
+  250 cursor2,0:print"u8 virt";:cursor12,0
+  260 forx=0to15:printchr$(b&(4+x));:next:cursor30,0
+  270 forx=0to1:printchr$(b&(22+x));:next:cursor33,0
+  280 forx=0to1:printchr$(b&(25+x));:next
+  290 b=3
+  300 do:cursor0,24:print"block ";:printusing"##";b;:window1,2,37,22,1:print"{home}{home}";
+  310 gosub500:ifa<>0thencursor0,2:foreground2:printds$:foreground1:stop
+  320 fory=0to7:o=32*y+2:cursor5,2+y:printusing"####";b&(o+28)+b&(o+29)*256:cursor12,2+y
+  330 forx=0to15:printchr$(b&(o+3+x));:next:cursor32,y+2:printft$(b&(o+0)and7);
+  340 next
+  350 getkeya&
+  360 ifa&=43andb<39thenb=b+1
+  370 ifa&=45andb>3thenb=b-1
+  380 loop
+  390 close15:end
   500 close5:open5,8,5,"#":print#15,"u1";5;0;t;b
   510 a=ds:ifa<>0thenclose5:return
   520 forx=0to255:get#5,a$:ifa$=""thenb&(x)=0:elseb&(x)=asc(a$):nextx
