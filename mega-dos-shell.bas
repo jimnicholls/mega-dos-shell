@@ -1,5 +1,7 @@
-   10 print "mega dos shell - alpha 1"
-   20 end
+   10 scnclr:print"mega dos shell - alpha 1"
+   20 print"1. directory browser":print"2. track editor":inputa
+   30 onagoto200,100
+   40 goto10
   100 scnclr:cursor56,0:input"track";t:cursor67,0:input"block";b
   110 open15,8,15:open5,8,5,"#":print#15,"u1";5;0;t;b
   115 ifds<>0thencursor0,2:foreground2:printds$:foreground1:stop
