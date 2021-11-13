@@ -34,8 +34,9 @@
   380 next
   390 getkeya&
   400 ifa&=43andb<39thenb=b+1
-  410 loop
-  420 close15:end
+  410 ifa&=45andb>3thenb=b-1
+  420 loop
+  430 close15:end
   500 close5:open5,8,5,"#":print#15,"u1";5;0;t;b
   510 a=ds:ifa<>0thenclose5:return
   520 forx=0to255:get#5,a$:ifa$=""thenb&(x)=0:elseb&(x)=asc(a$):nextx
