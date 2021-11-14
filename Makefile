@@ -2,9 +2,16 @@ C1541 = c1541
 PETCAT = petcat
 PRG_FILENAME = mega dos shell
 
-.PHONY: all build extract new
+.PHONY: menu build extract new
+.SILENT: menu
 
-all:
+menu:
+	echo 'You need to give a make target'
+	echo
+	echo 'make build       mega-dos-shell.bas  --> disk image'
+	echo 'make extract     mega-dos-shell.bas <--  disk image'
+	echo 'make new         create and format a new disk image'
+	false
 
 build: mega-dos-shell.d81 mega-dos-shell.bas
 	$(PETCAT) -w65 -o mega-dos-shell.prg mega-dos-shell.bas
