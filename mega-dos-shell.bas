@@ -3,16 +3,12 @@
    30 onagoto200,100
    40 goto10
   100 scnclr:cursor56,0:input"track";t:cursor67,0:input"block";b
-  110 open15,8,15:open5,8,5,"#":print#15,"u1";5;0;t;b
-  115 ifds<>0thencursor0,2:foreground2:printds$:foreground1:stop
-  120 fory=5to20
-  130 forx=5to26step3:get#5,a$:ifa$=""thena$="00":elsea$=right$(hex$(asc(a$)),2)
-  135 cursorx,y:printa$;:next
-  140 forx=31to53step3:get#5,a$:ifa$=""thena$="00":elsea$=right$(hex$(asc(a$)),2)
-  145 cursorx,y:printa$;:next
-  150 next
-  160 close5:close15
-  170 end
+  110 cursor56,0:printchr$(27);"qtrack";t:cursor67,0:print"block";b
+  120 open15,8,15:p=$40000:gosub500
+  130 ifa<>0thencursor0,2:foreground2:printds$:foreground1:stop
+  140 fory=5to20:cursor5,y:gosub160:print"  ";:gosub160:next
+  150 close15:end
+  160 forx=0to7:printright$(hex$(peek(p)),2)" ";:p=p+1:next:return
   200 scnclr:dimft$(7):restore220
   210 forx=0to7:readft$(x):next
   220 datadel,seq,prg,usr,rel,cbm,?,?
