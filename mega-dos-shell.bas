@@ -1,4 +1,4 @@
-   10 scnclr:print"mega dos shell - alpha 1"
+   10 gosub9000:scnclr:print"mega dos shell - alpha 1"
    20 print"1. directory browser":print"2. track editor":print"3. bam editor":inputa
    30 onagoto100,2000,4000
    40 goto10
@@ -65,6 +65,30 @@
  6010 a=ds:ifa<>0then6030
  6020 forx=ptop+255:get#5,a$:ifa$=""thenpokex,0:elsepokex,asc(a$):nextx
  6030 close5:close15:return
+ 7500 if(sb&(0)=d)and(sb&(1)=t)and(sb&(2)=x)and(sb&(3)=s)thena=0:return
+ 7510 gosub7600:ifa<>0thenreturn
+ 7520 gosub7800:ifa<>0thenreturn
+ 7530 ifx=1thenpoke$d080,peek($d080)or8
+ 7540 poke$d084,t:poke$d085,s:poke$d086,x:poke$d081,$40:wait$d082,$80,$80
+ 7550 a=peek($d082):if(aand28)=0thena=0:sb&(0)=d:sb&(1)=t:sb&(2)=x:sb&(3)=s:return
+ 7560 if(aand16)>0thena=1:elseif(aand8)>0thena=2:elsea=3
+ 7570 return
+ 7600 ifht&(d)=tthena=0:return
+ 7610 ifht&(d)=255thengosub7700:elsegosub7800
+ 7620 ifa<>0thenreturn
+ 7630 dowhileht&(d)<>t
+ 7640 ift<ht&(d)thenpoke$d081,$10:ht&(d)=ht&(d)-1:elsepoke$d081,$18:ht&(d)=ht&(d)+1
+ 7650 wait$d082,$80,$80:loop:return
+ 7700 gosub7800:ifa<>0thenreturn
+ 7710 dowhilenotpeek($d082)and1:poke$d081,$10:wait$d082,$80,$80:loop:ht&(d)=0:return
+ 7800 if(peek($d080)and$27)=($20ord)thena=0:return
+ 7810 poke$d080,$20ord:poke$d081,$20:wait$d082,$80,$80
+ 7820 if(peek($d083)and8)>0thena=0:return:elsea=4:goto7850
+ 7850 poke$d080,d:return
+ 9000 dimht&(7),sb&(3)
+ 9010 fori=0to7:ht&(i)=255:next
+ 9020 fori=0to3:ht&(i)=255:next
+ 9030 return
 65000 n$="mega dos shell":iflen(n$)>15thenprint"filename is too long":stop
 65010 dopen#1,"last version":ifds=0theninput#1,a:elsea=0
 65020 dclose#1:ifa<9thena=a+1:elsea=1
