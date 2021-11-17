@@ -5,9 +5,9 @@
   100 scnclr:dimft$(7):restore120
   110 forx=0to7:readft$(x):next
   120 datadel,seq,prg,usr,rel,cbm,?,?
-  130 open15,8,15:t=40:b=0:p=$40000:gosub6000
+  130 t=40:b=0:p=$40000:gosub6000
   140 ifa<>0thencursor0,2:foreground2:printds$:foreground1:stop
-  150 cursor2,0:print"u8 virt";:cursor12,0
+  150 cursor2,0:print"u9 virt";:cursor12,0
   160 forx=0to15:printchr$(peek(p+4+x));:next:cursor30,0
   170 forx=0to1:printchr$(peek(p+22+x));:next:cursor33,0
   180 forx=0to1:printchr$(peek(p+25+x));:next
@@ -24,12 +24,12 @@
   290 close15:end
  2000 scnclr:cursor56,0:input"track";t:cursor67,0:input"block";b
  2010 cursor56,0:printchr$(27);"qtrack";t:cursor67,0:print"block";b
- 2020 open15,8,15:p=$40000:gosub6000
+ 2020 p=$40000:gosub6000
  2030 ifa<>0thencursor0,2:foreground2:printds$:foreground1:stop
  2040 fory=5to20:cursor5,y:gosub2060:print"  ";:gosub2060:next
  2050 close15:end
  2060 forx=0to7:printright$(hex$(peek(p)),2)" ";:p=p+1:next:return
- 4000 scnclr:open15,8,15:gosub4900:gosub4800:close15:window2,4,79,23:tr=1:gosub4500
+ 4000 scnclr:gosub4900:gosub4800:close15:window2,4,79,23:tr=1:gosub4500
  4010 do:getkeya&
  4020 ifa&=43thengosub4100
  4030 ifa&=45thengosub4150
@@ -58,13 +58,13 @@
  4940 foreground14:cursor0,4:print"t{down}{left}r{down}{left}a{down}{left}c{down}{left}k"
  4950 foreground1:cursor5,24:print".";:cursor13,24:print"Q";:foreground24:cursor7,24:print"free";:cursor15,24:print"allocated";
  4960 t=40:b=0:p=$40000:gosub6000:ifa<>0thenstop
- 4970 cursor2,0:print"u8 virt";:cursor12,0
+ 4970 cursor2,0:print"u9 virt";:cursor12,0
  4980 forx=0to15:printchr$(peek(p+4+x));:next:cursor30,0:printchr$(peek(p+22))chr$(peek(p+23));:cursor33,0:printchr$(peek(p+25))chr$(peek(p+26));
  4990 foreground1:return
- 6000 close5:open5,8,5,"#":print#15,"u1";5;0;t;b
- 6010 a=ds:ifa<>0thenclose5:return
+ 6000 close5:close15:open15,9,15:open5,9,5,"#":print#15,"u1";5;0;t;b
+ 6010 a=ds:ifa<>0then6030
  6020 forx=ptop+255:get#5,a$:ifa$=""thenpokex,0:elsepokex,asc(a$):nextx
- 6030 close5:return
+ 6030 close5:close15:return
 65000 n$="mega dos shell":iflen(n$)>15thenprint"filename is too long":stop
 65010 dopen#1,"last version":ifds=0theninput#1,a:elsea=0
 65020 dclose#1:ifa<9thena=a+1:elsea=1
